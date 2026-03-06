@@ -1,0 +1,19 @@
+# JUCE / C++ Project Ignore
+build/
+Builds/
+JuceLibraryCode/
+*.xcodeproj/
+*.xcworkspace/
+.DS_Store
+*.user
+*.user.*
+*.suo
+*.sln
+*.sdf
+*.opensdf
+*.vcxproj
+*.filters
+*.ipch
+*.aps
+*.cache
+*.db

@@ -1,0 +1,49 @@
+name: Build and Release
+on:
+  push:
+    tags:
+      - 'v*' # Uruchom przy tagu wersji (np. git tag v2.4.0)
+  workflow_dispatch: # Pozwól uruchomić ręcznie
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Configure and Build
+        run: |
+          cmake -B build -G "Visual Studio 17 2022" -A x64 -DJUCE_BUILD_EXAMPLES=OFF -DJUCE_BUILD_EXTRAS=OFF
+          cmake --build build --config Release --target PsychoSaturator_VST3
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldenEraSaturator-Windows
+          path: build/PsychoSaturator_artefacts/Release/VST3/GoldenEraSaturator.vst3
+
+  create-release:
+    needs: build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Windows Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: GoldenEraSaturator-Windows
+          path: ./windows-vst3
+      - name: Zip Windows VST3
+        run: zip -r GoldenEraSaturator_Windows_VST3.zip ./windows-vst3
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v2.4.0-elite
+          name: Elite Signature Edition v2.4.0
+          body: |
+            ⚛️ Golden Era Saturator v2.4.0
+            - ADAA Technology
+            - 4x Oversampling
+            - Asymmetric Tube Saturation
+          files: |
+            GoldenEraSaturator_Windows_VST3.zip
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
