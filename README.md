@@ -51,7 +51,7 @@ This project is **not** open-source. All rights are reserved by **PSYCHODEL BEAT
 
 The source code is provided for portfolio demonstration and technical review purposes only. Use of the DSP engine, source code, or binaries in commercial products requires a valid license.
 
-For commercial partnership and white-label inquiries, please contact: **7z7fb8m46n@privaterelay.appleid.com**
+For commercial partnership and white-label inquiries, please contact: **psychodelbeats@gmail.com**
 
 ---
 *© 2026 PSYCHODEL BEATS & PsychoAudioPlugins. Powered by Psycho AI 24.*
